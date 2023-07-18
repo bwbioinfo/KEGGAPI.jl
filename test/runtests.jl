@@ -2,5 +2,6 @@ using KEGGAPI
 using Test
 
 @testset "KEGGAPI.jl" begin
-    # Write your tests here.
+    info = KEGGAPI.info("kegg")
+    @test typeof(info) == String
 end
