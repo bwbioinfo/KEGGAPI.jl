@@ -17,4 +17,9 @@ using DataFrames
     glucose = KEGGAPI.find("compound", "glucose")
     @test isa(glucose, DataFrame)  # Check if the glucose data is a DataFrame
     @test size(glucose) > (0, 0)  # Check if the glucose data is not empty (has rows and columns)
+    
+    # Retrieve a file with figure human glycolysis
+    image_file = KEGGAPI.get_image("hsa00010", "glycolysis.png")
+    @test isfile(image_file)  # Check if the image_file is a File
+    @test filesize(image_file) > 0  # Check if the file is empty (file size not 0)
 end
