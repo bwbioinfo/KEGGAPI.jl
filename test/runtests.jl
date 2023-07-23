@@ -21,5 +21,5 @@ using DataFrames
     # Retrieve a file with figure human glycolysis
     image_file = KEGGAPI.get_image("hsa00010", "glycolysis.png")
     @test isfile(image_file)  # Check if the image_file is a File
-    @test filesize(image_file) > 0  # Check if the file is empty (file size not 0)
+    @test filesize(image_file) > 0  # Check if the file is not empty (file size not 0)
 end
