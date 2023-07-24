@@ -1,6 +1,6 @@
 module KEGGAPI
 
-using HTTP, DataFrames
+using HTTP
 
 export request, info, list, find, get_image
 
