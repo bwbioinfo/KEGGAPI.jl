@@ -20,7 +20,7 @@ function list(list::String)
         elseif list == "organism"
             organism_parser(response_text, url)
         else
-            stop("The list you are looking for is not available")
+            print("The list you are looking for is not available")
         end
     # return the arrays 
     return kegg_data
