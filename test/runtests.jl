@@ -1,6 +1,5 @@
 using KEGGAPI
 using Test
-using DataFrames
 
 @testset "KEGGAPI.jl" begin
     # Retrieve information about the KEGG database
