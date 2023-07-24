@@ -1,39 +1,5 @@
 
-"""
-KEGGAPI.list(database) -> DataFrame
-
-Get a list of entries from a specific database from the KEGG API.
-
-# Examples
-```julia-repl
-julia> KEGGAPI.list("pathway")
-```
-"""
-# This function retrieves a list of entries from a specific database from the KEGG API.
-function list(list::String)
-    dbs = [
-        "pathway", "brite", "module", "ko", "vg", "vp", "ag", "genome", "compound",
-        "glycan", "reaction", "rclass", "enzyme", "network", "variant", "disease", 
-        "drug", "dgroup", "organism"
-    ]
-    kegg_data = 
-    if occursin("pathway" , list)
-        pathway_parser(list)
-    elseif list == "organism"
-        organism_parser(list)
-    else
-        stop("The list you are looking for is not available")
-    end
-   
-    # return the arrays 
-    return kegg_data
-end
-
-
-function pathway_parser(pathway::String)
-    # Define the URL for the API request.
-    url = "https://rest.kegg.jp/list/$pathway"
-    response_text = request(url)
+function pathway_parser(response_text::String, url::String)
     # Split the response into lines
     lines = split(response_text, "\n")
     # initialize the arrays
@@ -53,10 +19,7 @@ function pathway_parser(pathway::String)
 end
 
 
-function organism_parser(organism::String)
-    # Define the URL for the API request.
-    url = "https://rest.kegg.jp/list/$organism"
-    response_text = request(url)
+function organism_parser(response_text::String, url::String)
     # Split the response into lines
     lines = split(response_text, "\n")
     # initialize the arrays

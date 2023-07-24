@@ -5,7 +5,9 @@ using HTTP, DataFrames
 export request, info, list, find, get_image
 
 include("Structures.jl")
-include("KeggList.jl")
+include("Parsers.jl")
+include("List.jl")
+include("Find.jl")
 
 
 """
@@ -56,31 +58,6 @@ function info(database::String)
     # Return the lines as a string.
     return response_text
 end
-
-
-"""
-KEGGAPI.find(database, query) -> DataFrame
-
-Find entries in a specific database from the KEGG API.
-
-# Examples
-```julia-repl
-julia> KEGGAPI.find("compound","glucose")
-```
-"""
-# This function retrieves a list of entries from a specific database from the KEGG API.
-# and 
-function find(database::String, query::String)
-    url = "https://rest.kegg.jp/find/$database/$query"
-    response_text = request(url)
-    lines = split(response_text, "\n")
-
-    data = [split(line, "\t") for line in lines if line != ""]
-    df = DataFrame(Database=[x[1] for x in data], Description=[x[2] for x in data])
-
-    return df
-end
-
 
 """
 KEGGAPI.get_image(pathway) -> Image
