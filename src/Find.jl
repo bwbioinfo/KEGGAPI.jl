@@ -9,9 +9,8 @@ Find entries in a specific database from the KEGG API.
 julia> KEGGAPI.find("compound","glucose")
 ```
 """
-# This function retrieves a list of entries from a specific database from the KEGG API.
-# and 
 function find(database::String, query::String)
+    # This function retrieves a list of entries from a specific database from the KEGG API.
     url = "https://rest.kegg.jp/find/$database/$query"
     response_text = request(url)
     kegg_data = 

@@ -9,8 +9,8 @@ Get a list of entries from a specific database from the KEGG API.
 julia> KEGGAPI.list("pathway")
 ```
 """
-# This function retrieves a list of entries from a specific database from the KEGG API.
 function list(list::String)
+    # This function retrieves a list of entries from a specific database from the KEGG API.
     # Define the URL for the API request.
     url = "https://rest.kegg.jp/list/$list"
     response_text = request(url)

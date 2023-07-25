@@ -19,7 +19,7 @@ This function is not intended for direct use. Instead, use the `info`, `list`, a
 
 # Examples
 ```julia-repl
-julia> request("https://rest.kegg.jp/info/kegg")
+request("https://rest.kegg.jp/info/kegg")
 ```
 """
 function request(url::String)
@@ -46,11 +46,11 @@ Get information about a specific database from the KEGG API.
 
 # Examples
 ```julia-repl
-julia> KEGGAPI.info("kegg")
+KEGGAPI.info("kegg")
 ```
 """
-# function to retrieve information about a specific database from the KEGG API.
 function info(database::String)
+    # function to retrieve information about a specific database from the KEGG API.
     # Define the URL for the API request.
     url = "https://rest.kegg.jp/info/$database"
     # Make a request to the URL and convert the response to a string.
@@ -66,7 +66,7 @@ Get an image of a specific pathway from the KEGG API.
 
 # Examples
 ```julia-repl
-julia> KEGGAPI.get_image("hsa00010")
+KEGGAPI.get_image("hsa00010")
 ```
 """
 function get_image(pathway_id::String)
@@ -82,12 +82,12 @@ Save an image to a file.
 
 # Examples
 ```julia-repl
-julia> image = KEGGAPI.get_image("hsa00010")
-julia> KEGGAPI.save_image(image, "glycolysis.png")
+image = KEGGAPI.get_image("hsa00010")
+KEGGAPI.save_image(image, "glycolysis.png")
 ```
 """
-# write a test for the above function  in KEGGAPI/test/runtests.jl
 function save_image(image::Vector, filename::String)
+    # write a test for the above function  in KEGGAPI/test/runtests.jl
     open(filename, "w") do f
         write(f, image)
     end
