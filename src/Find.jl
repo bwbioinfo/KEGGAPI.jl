@@ -6,7 +6,7 @@ Find entries in a specific database from the KEGG API.
 
 # Examples
 ```julia-repl
-julia> KEGGAPI.find("compound","glucose")
+KEGGAPI.find("compound","glucose")
 ```
 """
 function find(database::String, query::String)
