@@ -6,7 +6,7 @@ Get a list of entries from a specific database from the KEGG API.
 
 # Examples
 ```julia-repl
-julia> KEGGAPI.list("pathway")
+KEGGAPI.list("pathway")
 ```
 """
 function list(list::String)
