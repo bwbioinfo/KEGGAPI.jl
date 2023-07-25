@@ -29,7 +29,7 @@ end
     # Save an image to a file
     kegg_image = KEGGAPI.get_image("hsa00010")
     save_image = KEGGAPI.save_image(kegg_image, "image.png")
-    @test isa(save_image, Vector) #  Check if the retrieved info is a vector
+    @test isa(save_image, String) #  Check if the retrieved info is a vector
     @test length(save_image) > 0  # Check if the retrieved vector is not empty
     @test_throws KEGGAPI.RequestError KEGGAPI.save_image("fail")
 end
