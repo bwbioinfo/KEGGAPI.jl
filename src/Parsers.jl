@@ -41,3 +41,24 @@ function organism_parser(response_text::String, url::String)
     kegg_data_list = KeggOrganismList(url, colnames, [tnumber, organism, species, phylogeny])
     return kegg_data_list
 end
+
+
+
+function conv_parser(response_text::String, url::String)
+    # Split the response into lines
+    lines = split(response_text, "\n")
+    # initialize the arrays
+    target_ids = String[]
+    source_ids = String[]
+    colnames = ["Target ID", "Source ID"]
+    # loop through the lines and split them into fields
+    for line in lines
+        fields = split(line, "\t")
+        length(fields) == 2 || continue  # Skip rows with less than 4 columns
+        push!(target_ids, fields[1])
+        push!(source_ids, fields[2])
+    end
+    # return the organism list
+    kegg_data_list = KeggOrganismList(url, colnames, [target_ids, source_ids])
+    return kegg_data_list
+end
