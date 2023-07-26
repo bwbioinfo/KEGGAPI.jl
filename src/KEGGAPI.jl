@@ -8,6 +8,8 @@ include("Structures.jl")
 include("Parsers.jl")
 include("List.jl")
 include("Find.jl")
+include("Conv.jl")
+include("Link.jl")
 
 
 """
