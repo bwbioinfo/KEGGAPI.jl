@@ -11,7 +11,7 @@ end
 
 @testset "KEGGAPI.list" begin
     # Retrieve a list of KEGG pathways
-    kegg_pahtways = KEGGAPI.list("pathway")
+    kegg_pathways = KEGGAPI.list("pathway")
     @test isa(kegg_pathways, KEGGAPI.KeggPathwayList)  # Check if the retrieved info is a string
     @test kegg_pathways != []  # Check if the retrieved list is not empty
     @test_throws KEGGAPI.RequestError KEGGAPI.list("fail")
