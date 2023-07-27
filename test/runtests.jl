@@ -25,7 +25,7 @@ end
     @test_throws KEGGAPI.RequestError KEGGAPI.get_image("fail")
 end
 
-@testset "KEGGAPI.save_image"begin
+@testset "KEGGAPI.save_image" begin
     # Save an image to a file
     kegg_image = KEGGAPI.get_image("hsa00010")
     save_image = KEGGAPI.save_image(kegg_image, "image.png")
