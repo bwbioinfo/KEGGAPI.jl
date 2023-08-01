@@ -22,3 +22,12 @@ end
     @test length(kegg_image) > 0  # Check if the retreived vector is not empty
     @test_throws KEGGAPI.RequestError KEGGAPI.get_image("fail")
 end
+
+@testset "KEGGAPI.save_image" begin
+    # Save an image to a file
+    file_name = "image.png"
+    kegg_image = KEGGAPI.get_image("hsa00010")
+    KEGGAPI.save_image(kegg_image, file_name)
+    @test isfile(file_name) #  Check if the retrieved info is a vector
+    @test filesize(file_name) > 0  # Check if the retrieved vector is not empty
+end
