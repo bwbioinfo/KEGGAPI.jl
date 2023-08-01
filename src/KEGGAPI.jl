@@ -41,6 +41,36 @@ function request(url::String)
     end
 end
 
+
+"""
+request_other(url)
+
+Make a request to the specified URL and return the response body as a vector.
+If an error occurs, a `RequestError` is thrown.
+This function is not intended for direct use.
+
+# Examples
+```julia-repl
+request_other("https://rest.kegg.jp/image/hsa00010")
+```
+"""
+function request_other(url::String)
+    response = HTTP.get(url, status_exception=false, verbose=false)
+
+    if (response.status == 200)
+        return response.body
+    else
+        throw(
+            RequestError(
+                """
+                Request to $url failed with status code $(response.status)
+                Are you sure your URL called a valid KEGG API endpoint?
+                """
+            )
+        )
+    end
+end
+
 """
 KEGGAPI.info(database) -> String
 
@@ -73,8 +103,8 @@ KEGGAPI.get_image("hsa00010")
 """
 function get_image(pathway_id::String)
     url = "https://rest.kegg.jp/get/$pathway_id/image"
-    response = HTTP.get(url)
-    return response.body
+    response = request_other(url)
+    return response
 end
 
 """
