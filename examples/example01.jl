@@ -32,9 +32,6 @@ DataFrame(
     kegg_organisms.colnames
     )
 
-using BenchmarkTools
-
-Ben
 # Find entries in the compound database related to glucose
 kegg_find_pathway = KEGGAPI.find("pathway", "glycolysis");
 DataFrame(
@@ -60,7 +57,6 @@ all(
         kegg_conv_eco.data
         )
     )
-
 
 kegg_link_pathway = KEGGAPI.link("pathway", "hsa");
 DataFrame(
