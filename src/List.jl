@@ -1,6 +1,6 @@
 
 """
-KEGGAPI.list(database) -> DataFrame
+KEGGAPI.list(database)
 
 Get a list of entries from a specific database from the KEGG API.
 

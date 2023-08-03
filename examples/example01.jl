@@ -13,8 +13,6 @@ DataFrame(
     kegg_pathways.colnames
     )
 
-kegg_pathways.data[1]
-
 # Get a list of pathways in the KEGG database
 kegg_pathways_human = KEGGAPI.list("pathway/hsa");
 DataFrame(
@@ -37,6 +35,32 @@ kegg_find_pathway = KEGGAPI.find("pathway", "glycolysis");
 DataFrame(
     kegg_find_pathway.data, 
     kegg_find_pathway.colnames
+    )
+
+kegg_find_compound = KEGGAPI.find("compound", "glucose");
+kegg_find_compound.url
+DataFrame(
+    kegg_find_compound.data, 
+    kegg_find_compound.colnames
+    )
+
+kegg_find_compound = KEGGAPI.find("compound", "100-150","mol_weight");
+DataFrame(
+    kegg_find_compound.data, 
+    kegg_find_compound.colnames
+    )
+
+kegg_find_gene = KEGGAPI.find("genes", "glycolysis");
+DataFrame(
+    kegg_find_gene.data, 
+    kegg_find_gene.colnames
+    )
+
+
+kegg_find_compound = KEGGAPI.find("compound", "100-150","mol_weight");
+DataFrame(
+    kegg_find_compound.data, 
+    kegg_find_compound.colnames
     )
 
 kegg_image = KEGGAPI.get_image("hsa00010")
@@ -64,4 +88,17 @@ DataFrame(
     kegg_link_pathway.colnames
     )
 
-kegg_link_pathway.data[1]
+
+genes_array = ["hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458"]
+genes_array2 = ["hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458","hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458","hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458"]
+
+push!(genes_array, genes_array2)
+
+kegg_get_genes = KEGGAPI.kegg_get(genes_array)
+length(kegg_get_genes[2])
+kegg_get_genes[2]
+
+
+kegg_get_genes = KEGGAPI.kegg_get(genes_array2, "ntseq")
+
+kegg_get_genes[2]

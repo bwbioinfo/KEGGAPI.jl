@@ -12,7 +12,7 @@ end
 @testset "KEGGAPI.list" begin
     # Retrieve a list of KEGG pathways
     kegg_pathways = KEGGAPI.list("pathway")
-    @test isa(kegg_pathways, KEGGAPI.KeggPathwayList)  # Check if the retrieved info is a list
+    @test isa(kegg_pathways, KEGGAPI.KeggTupleList)  # Check if the retrieved info is a list
     @test kegg_pathways != []  # Check if the retrieved list is not empty
     @test_throws KEGGAPI.RequestError KEGGAPI.list("fail")
 end
@@ -37,20 +37,29 @@ end
 @testset "KEGGAPI.conv" begin
     # Convert KEGG identifiers to/from outside database
     kegg_conv = KEGGAPI.conv("eco", "ncbi-geneid")
-    @test isa(kegg_conv, KEGGAPI.KeggOrganismList)  # Check if the retrieve info is a list
+    @test isa(kegg_conv, KEGGAPI.KeggTupleList)  # Check if the retrieve info is a list
     @test kegg_conv != []  # Check if retreived list is not empty
 end
 
 @testset "KEGGAPI.find" begin
     # Find entries in a specific database from the KEGG API
-    kegg_find = KEGGAPI.find("pathway", "glycolysis")
-    @test isa(kegg_find, KEGGAPI.KeggPathwayList)  # Check if the retrieve info is a list
-    @test kegg_find != []  # Check if retrieve list is not empty
+    kegg_find_pathway = KEGGAPI.find("pathway", "glycolysis")
+    @test isa(kegg_find_pathway, KEGGAPI.KeggTupleList)  # Check if the retrieve info is a list
+    @test kegg_find_pathway != []  # Check if retrieve list is not empty
+    kegg_find_compound = KEGGAPI.find("compound", "glucose")
+    @test isa(kegg_find_compound, KEGGAPI.KeggTupleList)  # Check if the retrieve info is a list
+    @test kegg_find_compound != []  # Check if retrieve list is not empty
+    kegg_find_compound_options = KEGGAPI.find("compound", "100-150", "mol_weight")
+    @test isa(kegg_find_compound_options, KEGGAPI.KeggTupleList)  # Check if the retrieve info is a list
+    @test kegg_find_compound_options != []  # Check if retrieve list is not empty
+    kegg_find_genes = KEGGAPI.find("genes", "glycolysis")
+    @test isa(kegg_find_genes, KEGGAPI.KeggTupleList)  # Check if the retrieve info is a list
+    @test kegg_find_genes != []  # Check if retrieve list is not empty
 end
 
 @testset "KEGGAPI.link" begin
     # Find related entries by using database cross-references
     kegg_link = KEGGAPI.link("pathway", "hsa")
-    @test isa(kegg_link, KEGGAPI.KeggOrganismList)  # Check if the retreive info is a list
+    @test isa(kegg_link, KEGGAPI.KeggTupleList)  # Check if the retreive info is a list
     @test kegg_link != []  # Check if retreinve list is not empty
 end
