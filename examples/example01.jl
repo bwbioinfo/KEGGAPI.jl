@@ -90,15 +90,14 @@ DataFrame(
 
 
 genes_array = ["hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458"]
-genes_array2 = ["hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458","hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458","hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458"]
+genes_array2 = ["hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458","hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458","hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458"]
 
-push!(genes_array, genes_array2)
 
 kegg_get_genes = KEGGAPI.kegg_get(genes_array)
 length(kegg_get_genes[2])
 kegg_get_genes[2]
 
+@time KEGGAPI.info("kegg");
+@time kegg_get_genes = KEGGAPI.kegg_get(["hsa:10458"]);
 
-kegg_get_genes = KEGGAPI.kegg_get(genes_array2, "ntseq")
-
-kegg_get_genes[2]
+kegg_get_genes

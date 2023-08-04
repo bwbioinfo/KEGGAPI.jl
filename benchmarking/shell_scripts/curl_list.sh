@@ -1,0 +1,1 @@
+x=$(curl https://rest.kegg.jp/list/hsa)
