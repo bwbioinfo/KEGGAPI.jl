@@ -58,9 +58,9 @@ rule benchmark_curl:
         "curl_outputs/output_{function}.txt"
     shell:
         """
-        /usr/bin/time -o "{output}" julia {input.script}
-        /usr/bin/time -a -o "{output}" julia {input.script}
-        /usr/bin/time -a -o "{output}" julia {input.script}
-        /usr/bin/time -a -o "{output}" julia {input.script}
-        /usr/bin/time -a -o "{output}" julia {input.script}
+        /usr/bin/time -o "{output}" bash {input.script}
+        /usr/bin/time -a -o "{output}" bash {input.script}
+        /usr/bin/time -a -o "{output}" bash {input.script}
+        /usr/bin/time -a -o "{output}" bash {input.script}
+        /usr/bin/time -a -o "{output}" bash {input.script}
         """

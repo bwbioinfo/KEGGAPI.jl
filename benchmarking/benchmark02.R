@@ -7,10 +7,10 @@ library(RColorBrewer)
 library(knitr)
 library(tidyverse)
 
-reticulate::py_install("biopython")
+# reticulate::py_install("biopython")
 import("Bio.KEGG.REST", as = "BK") -> BK
 
-julia_install_package("https://github.com/bwbioinfo/KEGGAPI.jl")
+# julia_install_package("https://github.com/bwbioinfo/KEGGAPI.jl")
 julia_library("KEGGAPI")
 
 microbenchmark(
@@ -32,16 +32,18 @@ microbenchmark(
             show_value = FALSE
         )
     },
-    "Get - R" = {keggGet("hsa:10458")},
-    "Info - R" = {keggInfo("kegg")},
-    "List - R" = {keggInfo("pathway")},
-    "Info - Python" = {BK$kegg_info("KEGG")},
-    "Get - Python" = {BK$kegg_get("hsa:10548")},
-    "List - Python" = {BK$kegg_list("pathway")},
-    "Info - Curl" = {system("curl https://rest.kegg.jp/info/KEGG")},
-    "List - Curl" = {system("curl https://rest.kegg.jp/list/pathway")},
-    "Get - Curl" = {system("curl https://rest.kegg.jp/get/hsa:10548")}
+    "Get - R" = {x <- keggGet("hsa:10458")},
+    "Info - R" = {x <- keggInfo("kegg")},
+    "List - R" = {x <- keggInfo("pathway")},
+    "Info - Python" = {x <- BK$kegg_info("KEGG")},
+    "Get - Python" = {x <- BK$kegg_get("hsa:10548")},
+    "List - Python" = {x <- BK$kegg_list("pathway")},
+    "Info - Curl" = {x <- system("curl https://rest.kegg.jp/info/KEGG", intern = TRUE)},
+    "List - Curl" = {x <- system("curl https://rest.kegg.jp/list/pathway", intern = TRUE)},
+    "Get - Curl" = {x <- system("curl https://rest.kegg.jp/get/hsa:10548", intern = TRUE)}
 ) -> mbm
+
+autoplot(mbm)
 
 tibble(
     "Expr" = mbm$expr,
@@ -53,8 +55,15 @@ tibble(
     summarise(
         Mean = mean(Time),
         SD = sd(Time)
-    ) %>% mutate(Expr = paste(Function, Language, sep = " - ") )->
+    ) %>%
+    mutate(
+        Expr = paste(Function, Language, sep = " - ")
+    ) ->
     summary_table
+
+# summary_table %>%
+#     select(-Expr) %>%
+#     write_csv("benchmark_compare.csv")
 
 ggplot(
     summary_table,
@@ -79,12 +88,12 @@ ggplot(
     scale_fill_brewer(palette = "Set1") +
     theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-ggsave(
-    "~/Documents/GitHub/KEGGAPI/KEGGAPI/benchmarking/benchmark_compare.png",
-    width = 20,
-    height = 10,
-    units = "cm"
-)
+# ggsave(
+#     "benchmark_compare.png",
+#     width = 20,
+#     height = 10,
+#     units = "cm"
+# )
 
 knitr::kable(
     summary_table %>%
@@ -93,5 +102,4 @@ knitr::kable(
     caption = "Sample Benchmarks"
 )
 
-autoplot(mbm)
 
