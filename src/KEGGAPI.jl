@@ -1,8 +1,8 @@
 module KEGGAPI
 
-using HTTP
+import HTTP: get
 
-export request, info, list, find, get_image
+export request, info, list, find, get_image, kegg_get, conv, link, save_image
 
 include("Structures.jl")
 include("Parsers.jl")
@@ -26,7 +26,7 @@ request("https://rest.kegg.jp/info/kegg")
 ```
 """
 function request(url::String)
-    response = HTTP.get(url, status_exception=false, verbose=false)
+    response = get(url, status_exception=false, verbose=false)
 
     if (response.status == 200)
         return String(response.body)
@@ -56,7 +56,7 @@ request_other("https://rest.kegg.jp/image/hsa00010")
 ```
 """
 function request_other(url::String)
-    response = HTTP.get(url, status_exception=false, verbose=false)
+    response = get(url, status_exception=false, verbose=false)
 
     if (response.status == 200)
         return response.body
