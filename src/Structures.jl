@@ -5,7 +5,7 @@ struct RequestError <: Exception
     message::String
 end
 
-mutable struct KeggPathwayList
+mutable struct KeggTupleList
     url::String
     colnames:: Vector{String}
     data::Vector{Any}
@@ -17,7 +17,7 @@ mutable struct KeggOrganismList
     data::Vector{Any}
 end
 
-mutable struct KeggGeneList
+mutable struct KeggGenesList
     url::String
     colnames:: Vector{String}
     data::Vector{Any}
