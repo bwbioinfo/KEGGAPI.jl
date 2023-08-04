@@ -2,102 +2,75 @@ using Revise
 using KEGGAPI
 using DataFrames
 
-# Get information about the KEGG database
+# Info Examples
 kegg_info = KEGGAPI.info("kegg");
-print(kegg_info)
+kegg_info = KEGGAPI.info("pathway");
+kegg_info = KEGGAPI.info("module");
 
-# Get a list of pathways in the KEGG database
-kegg_pathways = KEGGAPI.list("pathway");
-DataFrame(
-    kegg_pathways.data,  
-    kegg_pathways.colnames
-    )
-
-# Get a list of pathways in the KEGG database
-kegg_pathways_human = KEGGAPI.list("pathway/hsa");
-DataFrame(
-    kegg_pathways_human.data,  
-    kegg_pathways_human.colnames
-    )
-
-join(kegg_pathways_human.data[1][1:30] , "+")
-
-# Get a list of organisms in the KEGG database
+# List examples
+## List organisms
 kegg_organisms = KEGGAPI.list("organism");
-@time KEGGAPI.list("organism")
-DataFrame(
-    kegg_organisms.data, 
-    kegg_organisms.colnames
-    )
+## List pathways
+kegg_pathways = KEGGAPI.list("pathway");
+## List modules
+kegg_modules = KEGGAPI.list("module");
+## List orthologies
+kegg_orthologies = KEGGAPI.list("orthology");
+## List human pathways
+kegg_genes = KEGGAPI.list("hsa", "genes");
 
-# Find entries in the compound database related to glucose
-kegg_find_pathway = KEGGAPI.find("pathway", "glycolysis");
-DataFrame(
-    kegg_find_pathway.data, 
-    kegg_find_pathway.colnames
-    )
+# Find Examples
+## Find a compound
+kegg_compounds = KEGGAPI.find("compound", "glucose");
+kegg_compounds = KEGGAPI.find("compound", "C7H10O5", "formula");
+kegg_compounds = KEGGAPI.find("compound", "174.05", "exact_mass");
+kegg_compounds = KEGGAPI.find("compound", "300-310", "mol_weight");
+## Find a pathway
+kegg_pathways = KEGGAPI.find("pathway", "glycolysis");
+## Find a gene
+kegg_genes = KEGGAPI.find("genes", "glycolysis");
+kegg_genes = KEGGAPI.find("genes", "shiga toxin");
+## Find a drug
+kegg_drugs = KEGGAPI.find("drug", "aspirin");
+## Find a disease
+kegg_diseases = KEGGAPI.find("disease", "cancer");
+## Find a module
+kegg_modules = KEGGAPI.find("module", "M00001");
+## Find a orthology
+kegg_orthologies = KEGGAPI.find("orthology", "K00844");
+## Find a brite hierarchy
+kegg_brite = KEGGAPI.find("brite", "DNA Polymerase");
 
-kegg_find_compound = KEGGAPI.find("compound", "glucose");
-kegg_find_compound.url
-DataFrame(
-    kegg_find_compound.data, 
-    kegg_find_compound.colnames
-    )
+# Conv Examples
+## Convert from KEGG to NCBI
+kegg_conv = KEGGAPI.conv("eco", "ncbi-geneid");
+## Convert from NCBI to KEGG
+kegg_conv = KEGGAPI.conv("ncbi-geneid", "eco");
 
-kegg_find_compound = KEGGAPI.find("compound", "100-150","mol_weight");
-DataFrame(
-    kegg_find_compound.data, 
-    kegg_find_compound.colnames
-    )
+# Get Examples
+## Get a pathway
+kegg_pathway = KEGGAPI.kegg_get(["eco00010"]);
+## Get a gene
+kegg_gene = KEGGAPI.kegg_get(["eco:b0002"]);
+## Get a compound
+kegg_compound = KEGGAPI.kegg_get(["cpd:C00022"]);
+## Get a drug
+kegg_drug = KEGGAPI.kegg_get(["dr:D00111"]);
+## Get a drug and a gene
+kegg_drug_gene = KEGGAPI.kegg_get(["dr:D00111", "eco:b0002"]);
+## Get a disease
+kegg_disease = KEGGAPI.kegg_get(["ds:H00025"]);
 
-kegg_find_gene = KEGGAPI.find("genes", "glycolysis");
-DataFrame(
-    kegg_find_gene.data, 
-    kegg_find_gene.colnames
-    )
+# Link Examples
+## Link a pathway to a gene
+kegg_link = KEGGAPI.link("pathway", "hsa");
+## Link a pathway to a compound
+kegg_link = KEGGAPI.link("pathway", "cpd");
+## Link a pathway to a drug
+kegg_link = KEGGAPI.link("pathway", "dr");
 
-
-kegg_find_compound = KEGGAPI.find("compound", "100-150","mol_weight");
-DataFrame(
-    kegg_find_compound.data, 
-    kegg_find_compound.colnames
-    )
-
-kegg_image = KEGGAPI.get_image("hsa00010")
-isa(kegg_image, Vector)
-save_image(image, "glycolysis.png")
-
-kegg_conv_eco = KEGGAPI.conv("eco", "ncbi-geneid")
-DataFrame(
-    kegg_conv_eco.data, 
-    kegg_conv_eco.colnames
-    )
-
-kegg_conv_eco.data[1] |> println
-
-all(
-    map(
-        element -> length(element) > 0, 
-        kegg_conv_eco.data
-        )
-    )
-
-kegg_link_pathway = KEGGAPI.link("pathway", "hsa");
-DataFrame(
-    kegg_link_pathway.data, 
-    kegg_link_pathway.colnames
-    )
-
-
-genes_array = ["hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458"]
-genes_array2 = ["hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458","hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458","hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458"]
-
-
-kegg_get_genes = KEGGAPI.kegg_get(genes_array)
-length(kegg_get_genes[2])
-kegg_get_genes[2]
-
-@time KEGGAPI.info("kegg");
-@time kegg_get_genes = KEGGAPI.kegg_get(["hsa:10458"]);
-
-kegg_get_genes
+# Image Examples
+## Get an image
+kegg_image = KEGGAPI.get_image("hsa00010");
+## Save an image
+KEGGAPI.save_image(kegg_image, "image.png");
