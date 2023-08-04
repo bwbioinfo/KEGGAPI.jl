@@ -16,7 +16,7 @@ Example use cases can also be found as colab notebooks: `case01.ipynb`, `case02.
 
 ## Speed Tests
 
-![benchmarking/benchmark_compare.png]
+![KEGGAPI.jl Benchmarks](benchmarking/benchmark_compare.png "KEGGAPI.jl Benchmarks")
 
 ## Citation
 
