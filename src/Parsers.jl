@@ -1,4 +1,24 @@
 
+function tuple_parser(response_text::String, url::String)
+    # Split the response into lines
+    lines = split(response_text, "\n")
+    # initialize the arrays
+    id = String[]
+    name = String[]
+    colnames = ["ID", "Details"]
+    # loop through the lines and split them into fields
+    for line in lines
+        fields = split(line, "\t")
+        length(fields) == 2 || continue  # Skip rows with less than 2 columns
+        push!(id, fields[1])
+        push!(name, fields[2])
+    end
+
+    kegg_data = KeggTupleList(url, colnames, [id, name])
+    return kegg_data
+end
+
+
 function pathway_parser(response_text::String, url::String)
     # Split the response into lines
     lines = split(response_text, "\n")
@@ -19,48 +39,48 @@ function pathway_parser(response_text::String, url::String)
 end
 
 
-function compound_parser(response_text::String, url::String, option::String = "")
-    # Split the response into lines
-    lines = split(response_text, "\n")
-    # initialize the arrays
-    id = String[]
-    details = String[]
-    if option == ""
-        colnames = ["ID", "Compound Name"]
-    else
-        colnames = ["ID", option]
-    end
-    # loop through the lines and split them into fields
-    for line in lines
-        fields = split(line, "\t")
-        length(fields) == 2 || continue  # Skip rows with less than 2 columns
-        push!(id, fields[1])
-        push!(details, fields[2])
-    end
+# function compound_parser(response_text::String, url::String, option::String = "")
+#     # Split the response into lines
+#     lines = split(response_text, "\n")
+#     # initialize the arrays
+#     id = String[]
+#     details = String[]
+#     if option == ""
+#         colnames = ["ID", "Compound Name"]
+#     else
+#         colnames = ["ID", option]
+#     end
+#     # loop through the lines and split them into fields
+#     for line in lines
+#         fields = split(line, "\t")
+#         length(fields) == 2 || continue  # Skip rows with less than 2 columns
+#         push!(id, fields[1])
+#         push!(details, fields[2])
+#     end
 
-    kegg_data = KeggTupleList(url, colnames, [id, details])
-    return kegg_data
-end
+#     kegg_data = KeggTupleList(url, colnames, [id, details])
+#     return kegg_data
+# end
 
 
-function genes_parser(response_text::String, url::String)
-    # Split the response into lines
-    lines = split(response_text, "\n")
-    # initialize the arrays
-    id = String[]
-    details = String[]
-    colnames = ["ID", "Gene Name"]
-    # loop through the lines and split them into fields
-    for line in lines
-        fields = split(line, "\t")
-        length(fields) == 2 || continue  # Skip rows with less than 2 columns
-        push!(id, fields[1])
-        push!(details, fields[2])
-    end
-    # return the gene list
-    kegg_data = KeggTupleList(url, colnames, [id, details])
-    return kegg_data
-end
+# function genes_parser(response_text::String, url::String)
+#     # Split the response into lines
+#     lines = split(response_text, "\n")
+#     # initialize the arrays
+#     id = String[]
+#     details = String[]
+#     colnames = ["ID", "Gene Name"]
+#     # loop through the lines and split them into fields
+#     for line in lines
+#         fields = split(line, "\t")
+#         length(fields) == 2 || continue  # Skip rows with less than 2 columns
+#         push!(id, fields[1])
+#         push!(details, fields[2])
+#     end
+#     # return the gene list
+#     kegg_data = KeggTupleList(url, colnames, [id, details])
+#     return kegg_data
+# end
 
 function organism_parser(response_text::String, url::String)
     # Split the response into lines
@@ -103,5 +123,29 @@ function conv_parser(response_text::String, url::String)
     end
     # return the converted list
     kegg_data_list = KeggTupleList(url, colnames, [target_ids, source_ids])
+    return kegg_data_list
+end
+
+
+function genomic_feature_parser(response_text::String, url::String)
+    # Split the response into lines
+    lines = split(response_text, "\n")
+    # initialize the arrays
+    id = String[]
+    type = String[]
+    chromosomal_position = String[]
+    gene_name = String[]
+    colnames = ["ID", "Type", "Chromosomal Position", "Gene Name"]
+    # loop through the lines and split them into fields
+    for line in lines
+        fields = split(line, "\t")
+        length(fields) == 4 || continue  # Skip rows with less than 4 columns
+        push!(id, fields[1])
+        push!(type, fields[2])
+        push!(chromosomal_position, fields[3])
+        push!(gene_name, fields[4])
+    end
+    # return the converted list
+    kegg_data_list = KeggGenesList(url, colnames, [id, type, chromosomal_position, gene_name])
     return kegg_data_list
 end
