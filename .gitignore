@@ -6,3 +6,4 @@
 /docs/build/
 .snakemake
 *.png
+!benchmark_compare.png
