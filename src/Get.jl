@@ -1,8 +1,11 @@
 
 """
-KEGGAPI.get(database, query) -> Vector
+KEGGAPI.get(query, option) -> Vector
 
-Get entries from across the KEGG database
+Get entries from across the KEGG database. The get function takes a vector of strings
+and returns a vector containing the urls used and the data returned.
+
+The get function will split the vector into groups of 10 and make a request for each chunk.
 
 # Examples
 ```julia-repl
@@ -11,6 +14,11 @@ kegg_get_genes =
         ["hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458"], 
         "ntseq"
         )
+kegg_get_compounds = 
+KEGGAPI.kegg_get(
+    ["hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458"], 
+    "ntseq"
+    )
 ```
 """
 function kegg_get(query::Vector{String}, option::String = "")
@@ -18,7 +26,7 @@ function kegg_get(query::Vector{String}, option::String = "")
     chunk_size = 10
     # the maximum number of elements that can be processed in a single request
     query_elements = length(query)
-    query_chunks = div(query_elements, chunk_size)
+    query_chunks = ceil(Int, query_elements / chunk_size)
     urls = String[]
     data = String[]
     if option == "aaseq" || option == "ntseq"
@@ -31,7 +39,6 @@ function kegg_get(query::Vector{String}, option::String = "")
                 url = "https://rest.kegg.jp/get/$chunk_query/$option"
                 push!(urls, url)
                 response_text = request(url)
-                push!(urls, url)
                 for datum in split(response_text, r"(\n>|^>)")[2:end]
                     datum = replace(datum, r"\n$" => "")
                     push!(data, ">"*datum)
@@ -58,7 +65,6 @@ function kegg_get(query::Vector{String}, option::String = "")
                 url = "https://rest.kegg.jp/get/$chunk_query/$option"
                 push!(urls, url)
                 response_text = request(url)
-                push!(urls, url)
                 response_text2 = replace(response_text, r"\n///([^/]*)$" => "")
                 for datum in split(response_text2, "\n///\n")
                     push!(data, datum)
