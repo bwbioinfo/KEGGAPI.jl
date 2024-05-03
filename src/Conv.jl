@@ -9,8 +9,8 @@ Convert KEGG identifiers to/from outside identifiers.
 using KEGGAPI
 KEGGAPI.conv("eco", "ncbi-geneid")
 KEGGAPI.conv("ncbi-geneid", "eco")
-KEGGAPI.conv("hsa:10458+ece:Z5100", "ncbi-proteinid")
-KEGGAPI.conv("ncbi-geneid:948364", "genes")
+KEGGAPI.conv("ncbi-proteinid", "hsa:10458+ece:Z5100")
+KEGGAPI.conv("genes", "ncbi-geneid:948364")
 ```
 """
 function conv(target_db::String, source_db::String)
