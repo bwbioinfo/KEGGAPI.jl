@@ -7,3 +7,4 @@
 .snakemake
 *.png
 !benchmark_compare.png
+benchmarking/.Rhistory
