@@ -4,7 +4,8 @@ KEGGAPI.conv(<target_db>, <source_db>)
 
 Find related entries by using database cross-references
 
-# Examples
+Example:
+
 ```example
 KEGGAPI.link("pathway", "hsa")
 ```

@@ -4,7 +4,8 @@ KEGGAPI.list(database)
 
 Get a list of entries from a specific database from the KEGG API.
 
-# Examples
+Example:
+
 ```example
 KEGGAPI.list("pathway")
 ```

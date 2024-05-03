@@ -3,7 +3,8 @@ KEGGAPI.get_image(pathway) -> Image
 
 Get an image of a specific pathway from the KEGG API.
 
-# Examples
+Example:
+
 ```@example
 KEGGAPI.get_image("hsa00010")
 ```

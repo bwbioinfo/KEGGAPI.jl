@@ -19,6 +19,7 @@ Outputs a list with
 This allows to easily convert to a data frame:
 
 ```@example
+using DataFrames
 DataFrame(
   output.data,
   output.colnames
