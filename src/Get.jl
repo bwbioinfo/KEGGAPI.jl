@@ -8,7 +8,7 @@ and returns a vector containing the urls used and the data returned.
 The get function will split the vector into groups of 10 and make a request for each chunk.
 
 # Examples
-```julia-repl
+```@examples
 kegg_get_genes = 
     KEGGAPI.kegg_get(
         ["hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458"], 
