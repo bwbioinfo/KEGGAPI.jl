@@ -9,8 +9,9 @@ Documentation for [KEGGAPI](https://github.com/bwbioinfo/KEGGAPI.jl).
 ```@index
 ```
 
-## Functions
-
-```@autodocs
-Modules = [KEGGAPI]
+```@contents
+Pages = [
+    "man/functions.md",
+]
+Depth = 1
 ```

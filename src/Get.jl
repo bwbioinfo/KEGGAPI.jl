@@ -8,16 +8,19 @@ and returns a vector containing the urls used and the data returned.
 The get function will split the vector into groups of 10 and make a request for each chunk.
 
 # Examples
-```julia-repl
+```@example
+using KEGGAPI
 kegg_get_genes = 
     KEGGAPI.kegg_get(
         ["hsa:10458", "hsa:10458", "hsa:10458", "hsa:10458"], 
         "ntseq"
-        )
+        );
+first(kegg_get_genes)
 kegg_get_compounds = 
 KEGGAPI.kegg_get(
     ["C01290","G00092"]
-    )
+    );
+first(kegg_get_compounds)
 ```
 """
 function kegg_get(query::Vector{String}, option::String = "")
