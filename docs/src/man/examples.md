@@ -11,10 +11,13 @@ Querying the API for a simple conversion returns a list with:
 
 This allows to easily convert to a data frame:
 
-```@example
+```@meta
 using KEGGAPI
-output = KEGGAPI.conv("eco", "ncbi-geneid"); 
 using DataFrames
+```
+
+```@example
+output = KEGGAPI.conv("eco", "ncbi-geneid"); 
 DataFrame(
   output.data,
   output.colnames
@@ -22,8 +25,6 @@ DataFrame(
 ```
 
 ```@example
-using KEGGAPI
-using DataFrames
 output = KEGGAPI.conv("ncbi-geneid", "eco");
 DataFrame(
   output.data,
@@ -32,8 +33,6 @@ DataFrame(
 ```
 
 ```@example
-using KEGGAPI
-using DataFrames
 output = KEGGAPI.conv("ncbi-proteinid", "hsa:10458+ece:Z5100");
 DataFrame(
   output.data,
@@ -42,8 +41,6 @@ DataFrame(
 ```
 
 ```@example
-using KEGGAPI
-using DataFrames
 output = KEGGAPI.conv("genes", "ncbi-geneid:948364");
 DataFrame(
   output.data,
