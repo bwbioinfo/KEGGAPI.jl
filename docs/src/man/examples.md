@@ -4,14 +4,7 @@
 
 Examples analogous to [KEGG Conv](https://www.kegg.jp/kegg/rest/keggapi.html#conv)
 
-Querying the API for a simple conversion:
-
-```@example
-using KEGGAPI
-output = KEGGAPI.conv("eco", "ncbi-geneid"); 
-```
-
-Outputs a list with
+Querying the API for a simple conversion returns a list with:
 1. The API call
 2. The column headers of the call ( if the result is tabular )
 3. The data
@@ -19,6 +12,8 @@ Outputs a list with
 This allows to easily convert to a data frame:
 
 ```@example
+using KEGGAPI
+output = KEGGAPI.conv("eco", "ncbi-geneid"); 
 using DataFrames
 DataFrame(
   output.data,
