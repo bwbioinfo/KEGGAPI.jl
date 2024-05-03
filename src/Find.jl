@@ -5,7 +5,8 @@ KEGGAPI.find(database, query) -> KeggTupleList
 Find entries in a specific database from the KEGG API.
 
 # Examples
-```julia-repl
+```@example
+using KEGGAPI
 KEGGAPI.find("compound","glucose")
 ```
 """

@@ -5,7 +5,8 @@ KEGGAPI.conv(<target_db>, <source_db>)
 Convert KEGG identifiers to/from outside identifiers.
 
 # Examples
-```julia-repl
+```@example
+using KEGGAPI
 KEGGAPI.conv("eco", "ncbi-geneid")
 KEGGAPI.conv("ncbi-geneid", "eco")
 KEGGAPI.conv("hsa:10458+ece:Z5100", "ncbi-proteinid")
