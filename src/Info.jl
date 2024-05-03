@@ -3,8 +3,9 @@ KEGGAPI.info(database) -> String
 
 Get information about a specific database from the KEGG API.
 
-# Examples
-```julia-repl
+Example:
+
+```example
 KEGGAPI.info("kegg")
 ```
 """

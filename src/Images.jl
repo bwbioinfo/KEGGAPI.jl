@@ -3,8 +3,9 @@ KEGGAPI.get_image(pathway) -> Image
 
 Get an image of a specific pathway from the KEGG API.
 
-# Examples
-```julia-repl
+Example:
+
+```@example
 KEGGAPI.get_image("hsa00010")
 ```
 """
@@ -20,7 +21,7 @@ KEGGAPI.save_image(image, filename) -> filename
 Save an image to a file.
 
 # Examples
-```julia-repl
+```example
 image = KEGGAPI.get_image("hsa00010")
 KEGGAPI.save_image(image, "glycolysis.png")
 ```
