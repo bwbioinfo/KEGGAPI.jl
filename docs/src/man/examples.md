@@ -11,12 +11,12 @@ Querying the API for a simple conversion returns a list with:
 
 This allows to easily convert to a data frame:
 
-```@meta
+```@setup examples
 using KEGGAPI
 using DataFrames
 ```
 
-```@example
+```@example examples
 output = KEGGAPI.conv("eco", "ncbi-geneid"); 
 DataFrame(
   output.data,
@@ -24,7 +24,7 @@ DataFrame(
 )
 ```
 
-```@example
+```@example examples
 output = KEGGAPI.conv("ncbi-geneid", "eco");
 DataFrame(
   output.data,
@@ -32,7 +32,7 @@ DataFrame(
 )
 ```
 
-```@example
+```@example examples
 output = KEGGAPI.conv("ncbi-proteinid", "hsa:10458+ece:Z5100");
 DataFrame(
   output.data,
@@ -40,7 +40,7 @@ DataFrame(
 )
 ```
 
-```@example
+```@example examples
 output = KEGGAPI.conv("genes", "ncbi-geneid:948364");
 DataFrame(
   output.data,
