@@ -18,18 +18,18 @@ using DataFrames
 
 ```@example examples
 output = KEGGAPI.conv("eco", "ncbi-geneid"); 
-DataFrame(
+first(DataFrame(
   output.data,
   output.colnames
-)
+), 20)
 ```
 
 ```@example examples
 output = KEGGAPI.conv("ncbi-geneid", "eco");
-DataFrame(
+first(DataFrame(
   output.data,
   output.colnames
-)
+), 20)
 ```
 
 ```@example examples
