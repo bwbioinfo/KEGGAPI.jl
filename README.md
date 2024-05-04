@@ -12,7 +12,7 @@ KEGGAPI.jl is a Julia package for accesing the Kyoto Encyclopedia of Genes and G
 
 Examples can be found in the `examples` folder; `example01` provides a comprehensive demonstration of the functions contained in this package.
 
-Example use cases can also be found as colab notebooks: `case01.ipynb`, `case02.ipynb`, `case03.ipynb` show a sample workflow.
+Example use cases can also be found as colab notebooks: `case01.ipynb`, `case02.ipynb`, `case03.ipynb` and `case04.ipynb` show a sample workflow.
 
 ## Speed Tests
 
