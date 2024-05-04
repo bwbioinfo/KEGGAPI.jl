@@ -14,6 +14,7 @@ makedocs(;
         edit_link="main",
         assets=String[],
     ),
+    example_size_threshold=0,
     pages=[
         "Home" => "index.md",
     ],
