@@ -1,6 +1,6 @@
 # Some Examples
 
-## Basics
+## KEGGAPI.conv
 
 Examples analogous to [KEGG Conv](https://www.kegg.jp/kegg/rest/keggapi.html#conv)
 
@@ -21,7 +21,7 @@ output = KEGGAPI.conv("eco", "ncbi-geneid");
 first(DataFrame(
   output.data,
   output.colnames
-), 20)
+), 5)
 ```
 
 ```@example examples
@@ -29,7 +29,7 @@ output = KEGGAPI.conv("ncbi-geneid", "eco");
 first(DataFrame(
   output.data,
   output.colnames
-), 20)
+), 5)
 ```
 
 ```@example examples
