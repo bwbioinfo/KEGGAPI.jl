@@ -14,7 +14,6 @@ makedocs(;
         edit_link="main",
         assets=String[],
     ),
-    kwargs=[example_size_threshold=0],
     pages=[
         "Home" => "index.md",
     ],
